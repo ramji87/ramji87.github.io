@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ram Venkatraman</title>
+<meta name="description" content="Senior Technical Product Manager. 15 years enterprise cloud delivery. Built two production GenAI agents with live MCP integration.">
+<meta property="og:title" content="Ram Venkatraman — Enterprise PM">
+<meta property="og:description" content="I build production AI agents, not just roadmaps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+/* ── Tokens ─────────────────────────────────────────────────────────────────── */
+:root{
+  --bg:          #0E0E0E;
+  --surface:     #161616;
+  --vscode-bg:   #1E1E1E;
+  --vscode-side: #252526;
+  --vscode-tab:  #2D2D2D;
+  --vscode-tab-active: #1E1E1E;
+  --vscode-input:#3C3C3C;
+
+  --accent:      #D4943A;
+  --accent-dim:  rgba(212,148,58,.1);
+  --accent-mid:  rgba(212,148,58,.25);
+  --mcp:         #9B72CF;
+  --mcp-dim:     rgba(155,114,207,.12);
+
+  --text:        #CCCCCC;
+  --text-warm:   #D4CFC7;
+  --text-dim:    #5A5A5A;
+  --text-mid:    #888888;
+  --text-bright: #EEEBE5;
+
+  --green:       #4EC994;
+  --green-dim:   rgba(78,201,148,.1);
+  --red:         #F28B82;
+
+  --c-blue:      #9CDCFE;
+  --c-string:    #CE9178;
+  --c-keyword:   #569CD6;
+  --c-type:      #4EC9B0;
+  --c-comment:   #6A9955;
+  --c-num:       #B5CEA8;
+
+  --border:      rgba(255,255,255,.06);
+  --border-med:  rgba(255,255,255,.12);
+
+  --ff-serif:    'Fraunces', Georgia, serif;
+  --ff-sans:     'Instrument Sans', system-ui, sans-serif;
+  --ff-mono:     'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────────── */
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--ff-sans);
+  font-size:15px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────────────── */
+.container{
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 2rem;
+}
+@media(max-width:640px){.container{padding:0 1.2rem}}
+
+/* ── Nav ─────────────────────────────────────────────────────────────────────── */
+nav{
+  padding:1.2rem 2rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  background:rgba(14,14,14,.92);
+  backdrop-filter:blur(10px);
+  z-index:99;
+}
+.nav-name{
+  font-family:var(--ff-mono);
+  font-size:.8rem;
+  color:var(--text-mid);
+  letter-spacing:.05em;
+}
+.nav-name strong{color:var(--accent);font-weight:500}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+}
+.nav-links a{
+  font-family:var(--ff-mono);
+  font-size:.72rem;
+  color:var(--text-dim);
+  text-decoration:none;
+  letter-spacing:.04em;
+  transition:color .15s;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-contact{
+  color:var(--accent)!important;
+  border:1px solid var(--accent-mid);
+  padding:.3rem .75rem;
+  border-radius:3px;
+}
+.nav-contact:hover{background:var(--accent-dim)!important}
+
+/* ── Header ──────────────────────────────────────────────────────────────────── */
+header{
+  padding:5rem 0 4rem;
+  position:relative;
+}
+.header-inner{
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 2rem;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:0 2.5rem;
+  align-items:start;
+}
+.sec-num{
+  font-family:var(--ff-mono);
+  font-size:.68rem;
+  color:var(--text-dim);
+  border:1px solid var(--border);
+  padding:.25rem .45rem;
+  border-radius:2px;
+  margin-top:.55rem;
+  letter-spacing:.04em;
+  white-space:nowrap;
+  user-select:none;
+}
+.header-content{}
+h1{
+  font-family:var(--ff-serif);
+  font-size:clamp(3rem,7vw,5.5rem);
+  font-weight:300;
+  line-height:.98;
+  letter-spacing:-.02em;
+  color:var(--text-bright);
+  font-style:italic;
+}
+h1 em{
+  font-style:normal;
+  color:var(--accent);
+}
+.header-role{
+  font-family:var(--ff-mono);
+  font-size:.8rem;
+  color:var(--text-mid);
+  margin-top:1.5rem;
+  letter-spacing:.06em;
+}
+.header-role span{color:var(--accent)}
+.header-bio{
+  margin-top:1.2rem;
+  color:var(--text-warm);
+  font-size:.98rem;
+  line-height:1.75;
+  max-width:520px;
+}
+.header-bio strong{color:var(--text-bright)}
+.header-meta{
+  margin-top:2rem;
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  flex-wrap:wrap;
+}
+.meta-item{
+  font-family:var(--ff-mono);
+  font-size:.7rem;
+  color:var(--text-dim);
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+}
+.meta-item::before{
+  content:'';
+  width:4px;height:4px;
+  border-radius:50%;
+  background:var(--text-dim);
+}
+.meta-item.target{color:var(--accent)}
+.meta-item.target::before{background:var(--accent)}
+
+/* ── Section chrome ─────────────────────────────────────────────────────────── */
+.section-wrap{
+  padding:4rem 0;
+  border-top:1px solid var(--border);
+}
+.section-grid{
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 2rem;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:0 2.5rem;
+  align-items:start;
+}
+.section-body{}
+h2{
+  font-family:var(--ff-serif);
+  font-size:clamp(1.5rem,2.8vw,2.2rem);
+  font-weight:300;
+  color:var(--text-bright);
+  letter-spacing:-.01em;
+  font-style:italic;
+  margin-bottom:1rem;
+}
+.section-intro{
+  color:var(--text-mid);
+  font-size:.9rem;
+  line-height:1.7;
+  max-width:540px;
+  margin-bottom:2rem;
+}
+
+/* ── VS Code environment ─────────────────────────────────────────────────────── */
+.vscode{
+  border:1px solid var(--border-med);
+  border-radius:4px;
+  overflow:hidden;
+  background:var(--vscode-bg);
+  font-family:var(--ff-mono);
+}
+.vscode-titlebar{
+  background:#3C3C3C;
+  padding:.5rem .85rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  border-bottom:1px solid rgba(0,0,0,.4);
+}
+.traffic{display:flex;gap:.45rem}
+.traffic span{
+  width:11px;height:11px;
+  border-radius:50%;
+  cursor:default;
+}
+.t-r{background:#FF5F57}.t-y{background:#FEBC2E}.t-g{background:#28C840}
+.vscode-title{
+  font-size:.7rem;
+  color:rgba(255,255,255,.45);
+  margin-left:.5rem;
+  letter-spacing:.02em;
+}
+.vscode-tabs{
+  display:flex;
+  background:var(--vscode-tab);
+  border-bottom:1px solid rgba(0,0,0,.4);
+  overflow-x:auto;
+}
+.vscode-tabs::-webkit-scrollbar{display:none}
+.tab{
+  padding:.55rem 1rem;
+  font-size:.72rem;
+  color:rgba(255,255,255,.45);
+  cursor:pointer;
+  border-right:1px solid rgba(0,0,0,.3);
+  white-space:nowrap;
+  display:flex;
+  align-items:center;
+  gap:.35rem;
+  transition:background .1s,color .1s;
+}
+.tab.active{
+  background:var(--vscode-tab-active);
+  color:var(--text);
+  border-top:1px solid var(--accent);
+  margin-top:-1px;
+}
+.tab-dot{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--text-mid);
+  flex-shrink:0;
+}
+.tab-dot.mod{background:var(--accent)}
+.tab-icon-ts{
+  font-size:.65rem;
+  background:#2F74C0;
+  color:white;
+  padding:1px 3px;
+  border-radius:2px;
+  font-weight:500;
+  line-height:1.4;
+}
+.tab-icon-json{
+  font-size:.65rem;
+  background:#C09820;
+  color:white;
+  padding:1px 3px;
+  border-radius:2px;
+  font-weight:500;
+  line-height:1.4;
+}
+.vscode-body{
+  display:grid;
+  grid-template-columns:190px 1fr;
+}
+@media(max-width:768px){
+  .vscode-body{grid-template-columns:1fr}
+  .vscode-sidebar{display:none}
+}
+.vscode-sidebar{
+  background:var(--vscode-side);
+  border-right:1px solid rgba(0,0,0,.3);
+  padding:.75rem 0;
+  overflow:hidden;
+}
+.sidebar-section{
+  padding:0 .85rem .5rem;
+  font-size:.62rem;
+  color:rgba(255,255,255,.35);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.file-tree{list-style:none}
+.ft-item{
+  padding:.22rem .85rem;
+  font-size:.72rem;
+  color:rgba(255,255,255,.5);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  transition:background .1s;
+}
+.ft-item:hover{background:rgba(255,255,255,.05)}
+.ft-item.active{background:rgba(255,255,255,.08);color:var(--text)}
+.ft-item.folder{color:rgba(255,255,255,.7);font-weight:500}
+.ft-item.indent{padding-left:1.6rem}
+.ft-icon-ts{display:inline-block;font-size:.58rem;background:#2F74C0;color:white;padding:0 2px;border-radius:1px;line-height:1.5;flex-shrink:0}
+.ft-icon-json{display:inline-block;font-size:.58rem;background:#C09820;color:white;padding:0 2px;border-radius:1px;line-height:1.5;flex-shrink:0}
+.ft-icon-md{display:inline-block;font-size:.58rem;background:#519ABA;color:white;padding:0 2px;border-radius:1px;line-height:1.5;flex-shrink:0}
+.ft-chevron{font-size:.6rem;color:rgba(255,255,255,.3);flex-shrink:0}
+
+.vscode-main{
+  display:flex;
+  flex-direction:column;
+  min-height:480px;
+}
+.copilot-chat{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  padding:0;
+}
+.chat-history{
+  flex:1;
+  padding:1rem 1.2rem;
+  overflow-y:auto;
+  min-height:160px;
+  max-height:260px;
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+}
+.chat-empty{
+  font-size:.78rem;
+  color:var(--text-dim);
+  font-style:italic;
+  padding:.5rem 0;
+}
+.chat-msg{
+  display:flex;
+  gap:.75rem;
+  align-items:flex-start;
+  animation:msg-in .25s ease both;
+}
+@keyframes msg-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.chat-avatar{
+  width:22px;height:22px;
+  border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:500;
+  flex-shrink:0;
+  margin-top:1px;
+}
+.av-user{background:rgba(78,201,148,.2);color:var(--green)}
+.av-agent{background:rgba(155,114,207,.2);color:var(--mcp)}
+.chat-bubble{
+  font-size:.8rem;
+  line-height:1.6;
+  color:var(--text);
+}
+.chat-bubble.user-bubble{color:var(--text-warm)}
+.chat-bubble.agent-bubble{color:var(--text)}
+.mcp-note{
+  font-size:.7rem;
+  color:var(--mcp);
+  background:var(--mcp-dim);
+  border:1px solid rgba(155,114,207,.2);
+  border-radius:3px;
+  padding:.3rem .6rem;
+  margin-top:.4rem;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+}
+.mcp-pulse{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--mcp);
+  animation:pulse-mcp 1.2s ease infinite;
+}
+@keyframes pulse-mcp{0%,100%{opacity:.4;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+
+.chat-input-area{
+  border-top:1px solid rgba(0,0,0,.4);
+  background:rgba(0,0,0,.2);
+  padding:.85rem 1rem;
+}
+.chat-input-label{
+  font-size:.62rem;
+  color:rgba(255,255,255,.3);
+  margin-bottom:.5rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.chat-textarea{
+  width:100%;
+  background:var(--vscode-input);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:3px;
+  color:var(--text);
+  font-family:var(--ff-mono);
+  font-size:.78rem;
+  padding:.65rem .8rem;
+  resize:none;
+  outline:none;
+  line-height:1.5;
+  transition:border-color .15s;
+}
+.chat-textarea:focus{border-color:rgba(155,114,207,.5)}
+.chat-textarea::placeholder{color:rgba(255,255,255,.2)}
+.chat-actions{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:.6rem;
+  gap:.6rem;
+}
+.chat-hint{
+  font-size:.65rem;
+  color:rgba(255,255,255,.2);
+}
+.chat-btn{
+  background:var(--accent);
+  color:#0E0E0E;
+  border:none;
+  border-radius:3px;
+  padding:.45rem 1rem;
+  font-family:var(--ff-mono);
+  font-size:.72rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:opacity .15s;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+  white-space:nowrap;
+}
+.chat-btn:hover{opacity:.85}
+.chat-btn:disabled{opacity:.35;cursor:not-allowed}
+.spin{
+  width:11px;height:11px;
+  border:1.5px solid rgba(0,0,0,.3);
+  border-top-color:#0E0E0E;
+  border-radius:50%;
+  animation:spin .6s linear infinite;
+  flex-shrink:0;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Output panel */
+.output-panel{
+  border-top:1px solid rgba(0,0,0,.4);
+  background:var(--vscode-bg);
+}
+.output-tabs{
+  display:flex;
+  background:#252526;
+  border-bottom:1px solid rgba(0,0,0,.4);
+}
+.output-tab{
+  padding:.4rem .85rem;
+  font-size:.68rem;
+  color:rgba(255,255,255,.4);
+  cursor:pointer;
+  border-right:1px solid rgba(0,0,0,.2);
+}
+.output-tab.active{
+  color:var(--text);
+  background:var(--vscode-bg);
+}
+.output-content{
+  padding:.85rem 1rem;
+  font-family:var(--ff-mono);
+  font-size:.72rem;
+  line-height:1.7;
+  min-height:120px;
+  max-height:260px;
+  overflow-y:auto;
+  color:var(--text-dim);
+}
+.output-content.has-result{color:var(--text)}
+.output-line{display:flex;gap:.5rem}
+.ln{
+  color:rgba(255,255,255,.15);
+  user-select:none;
+  min-width:20px;
+  text-align:right;
+}
+.output-idle{
+  color:var(--text-dim);
+  padding:.5rem 0;
+  font-style:italic;
+}
+.o-key{color:var(--c-blue)}
+.o-str{color:var(--c-string)}
+.o-num{color:var(--c-num)}
+.o-bool{color:var(--c-keyword)}
+.o-comment{color:var(--c-comment)}
+.o-type{color:var(--c-type)}
+.o-mcp{color:var(--mcp)}
+.o-punc{color:var(--text-mid)}
+
+/* ── Architecture ────────────────────────────────────────────────────────────── */
+.arch-wrap{
+  display:grid;
+  grid-template-columns:1fr 480px;
+  gap:3rem;
+  align-items:start;
+}
+@media(max-width:900px){.arch-wrap{grid-template-columns:1fr}}
+.arch-prose p{
+  color:var(--text-mid);
+  font-size:.9rem;
+  line-height:1.75;
+  margin-bottom:.85rem;
+}
+.arch-prose p strong{color:var(--text-warm)}
+.arch-prose p em{color:var(--mcp);font-style:normal}
+.arch-points{
+  margin-top:1.5rem;
+  display:flex;
+  flex-direction:column;
+  gap:.65rem;
+}
+.ap{
+  display:flex;
+  gap:.85rem;
+  align-items:flex-start;
+}
+.ap-marker{
+  font-family:var(--ff-mono);
+  font-size:.65rem;
+  color:var(--accent);
+  padding-top:.15rem;
+  white-space:nowrap;
+}
+.ap-text{}
+.ap-title{
+  font-size:.88rem;
+  font-weight:500;
+  color:var(--text-warm);
+  margin-bottom:.15rem;
+}
+.ap-desc{
+  font-size:.82rem;
+  color:var(--text-mid);
+  line-height:1.55;
+}
+
+/* ── SVG diagram ─────────────────────────────────────────────────────────────── */
+.arch-diagram{
+  background:var(--surface);
+  border:1px solid var(--border-med);
+  border-radius:4px;
+  padding:1.5rem;
+}
+.diagram-label{
+  font-family:var(--ff-mono);
+  font-size:.6rem;
+  color:var(--text-dim);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin-bottom:1rem;
+}
+
+/* ── Numbers ─────────────────────────────────────────────────────────────────── */
+.data-table{
+  width:100%;
+  border-collapse:collapse;
+  font-family:var(--ff-mono);
+  font-size:.78rem;
+}
+.data-table thead tr{
+  border-bottom:1px solid var(--border-med);
+}
+.data-table th{
+  color:var(--text-dim);
+  font-weight:400;
+  text-align:left;
+  padding:.6rem .5rem;
+  font-size:.65rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.data-table td{
+  padding:.65rem .5rem;
+  border-bottom:1px solid var(--border);
+  color:var(--text);
+  vertical-align:top;
+}
+.data-table tr:last-child td{border-bottom:none}
+.td-metric{color:var(--text-dim);font-size:.75rem}
+.td-value{color:var(--accent);font-weight:500;white-space:nowrap}
+.td-context{color:var(--text-dim);font-size:.72rem}
+
+/* ── Footer ──────────────────────────────────────────────────────────────────── */
+footer{
+  margin-top:0;
+  padding:3rem 2rem;
+  border-top:1px solid var(--border);
+  max-width:1080px;
+  margin:0 auto;
+}
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  flex-wrap:wrap;
+  gap:1.5rem;
+}
+.footer-left{}
+.footer-name{
+  font-family:var(--ff-serif);
+  font-size:1.4rem;
+  font-weight:300;
+  color:var(--text-bright);
+  font-style:italic;
+  margin-bottom:.4rem;
+}
+.footer-contact{
+  font-family:var(--ff-mono);
+  font-size:.7rem;
+  color:var(--text-dim);
+  line-height:1.9;
+}
+.footer-contact a{color:var(--accent);text-decoration:none}
+.footer-contact a:hover{text-decoration:underline}
+.footer-right{
+  font-family:var(--ff-mono);
+  font-size:.65rem;
+  color:var(--text-dim);
+  text-align:right;
+  line-height:1.8;
+}
+.footer-right span{color:var(--accent)}
+
+/* ── Experience ──────────────────────────────────────────────────────────────── */
+.exp-list{display:flex;flex-direction:column;gap:3rem;margin-top:2rem}
+.exp-hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem;flex-wrap:wrap;gap:.5rem}
+.exp-company{font-family:var(--ff-mono);font-size:.88rem;font-weight:500;color:var(--text-bright)}
+.exp-dates{font-family:var(--ff-mono);font-size:.72rem;color:var(--text-dim)}
+.exp-role{font-family:var(--ff-serif);font-size:1.4rem;font-weight:300;color:var(--accent);font-style:italic;margin-bottom:.2rem;line-height:1.1}
+.exp-loc{font-family:var(--ff-mono);font-size:.68rem;color:var(--text-dim);margin-bottom:.9rem;letter-spacing:.03em}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.exp-bullets li{font-size:.88rem;color:var(--text-mid);line-height:1.7;padding-left:1.3rem;position:relative}
+.exp-bullets li::before{content:'—';position:absolute;left:0;color:var(--text-dim);font-family:var(--ff-mono)}
+.exp-bullets li strong{color:var(--text-warm);font-weight:500}
+.exp-bullets li em{color:var(--mcp);font-style:normal}
+.exp-tag{display:inline-flex;align-items:center;gap:.3rem;background:var(--accent-dim);border:1px solid var(--accent-mid);border-radius:3px;font-family:var(--ff-mono);font-size:.65rem;color:var(--accent);padding:.15rem .5rem;margin-left:.4rem;vertical-align:middle;white-space:nowrap}
+.exp-divider{border:none;border-top:1px dashed var(--border);margin:0}
+
+/* ── Skills ──────────────────────────────────────────────────────────────────── */
+.skills-table{width:100%;border-collapse:collapse;margin-top:1.5rem}
+.skills-table tr{border-bottom:1px solid var(--border)}
+.skills-table tr:last-child{border-bottom:none}
+.skills-table td{padding:.8rem .5rem;vertical-align:top}
+.sk-cat{font-family:var(--ff-mono);font-size:.65rem;color:var(--text-dim);white-space:nowrap;width:170px;padding-right:1.5rem;text-transform:uppercase;letter-spacing:.1em;padding-top:.95rem}
+.sk-items{font-size:.86rem;color:var(--text);line-height:1.75}
+.sk-hi{color:var(--accent);font-weight:500}
+.sk-mcp{color:var(--mcp)}
+.sk-sep{color:var(--text-dim);margin:0 .2rem}
+
+/* ── Education & Certs ───────────────────────────────────────────────────────── */
+.edu-cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem}
+@media(max-width:700px){.edu-cert-grid{grid-template-columns:1fr}}
+.edu-degree{font-family:var(--ff-serif);font-size:1.25rem;font-weight:300;color:var(--text-bright);font-style:italic;margin-bottom:.35rem;line-height:1.2}
+.edu-program{font-family:var(--ff-mono);font-size:.75rem;color:var(--text-dim);margin-bottom:.2rem}
+.edu-school{font-family:var(--ff-mono);font-size:.75rem;color:var(--accent);margin-bottom:.2rem}
+.edu-detail{font-family:var(--ff-mono);font-size:.68rem;color:var(--text-dim)}
+.certs-label{font-family:var(--ff-mono);font-size:.65rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
+.cert-list{display:flex;flex-direction:column;gap:.7rem}
+.cert-item{display:flex;align-items:flex-start;gap:.85rem}
+.cert-year{font-family:var(--ff-mono);font-size:.68rem;color:var(--accent);min-width:34px;padding-top:.1rem}
+.cert-name{font-size:.84rem;color:var(--text-mid);line-height:1.5}
+
+/* ── Scroll bar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:2px}
+
+/* ── Selection ───────────────────────────────────────────────────────────────── */
+::selection{background:rgba(212,148,58,.25)}
+
+/* ── Utility ─────────────────────────────────────────────────────────────────── */
+.sr-only{position:absolute;width:1px;height:1px;clip:rect(0,0,0,0);overflow:hidden}
+</style>
+</head>
+<body>
+
+<!-- nav -->
+<nav>
+  <div class="nav-name"><strong>ram venkatraman</strong> / portfolio</div>
+  <div class="nav-links">
+    <a href="#work">work</a>
+    <a href="#experience">experience</a>
+    <a href="#skills">skills</a>
+    <a href="#numbers">numbers</a>
+    <a href="mailto:ramjimsse@gmail.com" class="nav-contact">get in touch</a>
+  </div>
+</nav>
+
+<!-- header -->
+<header>
+  <div class="header-inner">
+    <div class="sec-num">00</div>
+    <div class="header-content">
+      <h1>Janakiraman<br><em>Venkatraman</em></h1>
+      <div class="header-role">
+        Senior Technical PM &nbsp;/&nbsp; Starbucks Technology &nbsp;/&nbsp;
+        <span>open to senior PM roles · Redmond, WA</span>
+      </div>
+      <p class="header-bio">
+        Fifteen years building enterprise systems at scale. Last year I built
+        <strong>two production GenAI agents with live MCP integration</strong> —
+        inside VS Code, from scratch, alone. Not a proof-of-concept.
+        Both are in daily use. This site runs the same agent, live.
+      </p>
+      <div class="header-meta">
+        <span class="meta-item">Redmond, WA</span>
+        <span class="meta-item">Starbucks Technology</span>
+        <span class="meta-item">$1.35B B2B platform delivered</span>
+        <span class="meta-item target">enterprise AI · cloud platforms · B2B SaaS</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- work / demo -->
+<section class="section-wrap" id="work">
+  <div class="section-grid">
+    <div class="sec-num">01</div>
+    <div class="section-body">
+      <h2>The work</h2>
+      <p class="section-intro">
+        This is a live version of the AI Intake Agent I built at Starbucks.
+        It runs inside VS Code as a Copilot Chat extension. During generation,
+        it calls the Knowledge Copilot via <span style="color:var(--mcp)">MCP</span>
+        to pull enterprise context. Type any rough feature idea — the messier the better.
+      </p>
+
+      <!-- VS Code environment -->
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <div class="traffic">
+            <span class="t-r"></span>
+            <span class="t-y"></span>
+            <span class="t-g"></span>
+          </div>
+          <div class="vscode-title">Visual Studio Code — intake-agent</div>
+        </div>
+
+        <div class="vscode-tabs">
+          <div class="tab active">
+            <span class="tab-icon-ts">TS</span>
+            extension.ts
+            <span class="tab-dot"></span>
+          </div>
+          <div class="tab">
+            <span class="tab-icon-ts">TS</span>
+            mcpClient.ts
+          </div>
+          <div class="tab" id="output-tab" style="display:none">
+            <span class="tab-icon-json">{}</span>
+            output.json
+            <span class="tab-dot mod" id="output-dot"></span>
+          </div>
+        </div>
+
+        <div class="vscode-body">
+          <!-- sidebar -->
+          <aside class="vscode-sidebar" aria-label="File explorer">
+            <div class="sidebar-section">Explorer</div>
+            <ul class="file-tree">
+              <li class="ft-item folder"><span class="ft-chevron">▾</span> INTAKE-AGENT</li>
+              <li class="ft-item folder indent"><span class="ft-chevron">▾</span> src</li>
+              <li class="ft-item indent active" style="padding-left:2.4rem">
+                <span class="ft-icon-ts">TS</span> extension.ts
+              </li>
+              <li class="ft-item indent" style="padding-left:2.4rem">
+                <span class="ft-icon-ts">TS</span> mcpClient.ts
+              </li>
+              <li class="ft-item indent" style="padding-left:2.4rem">
+                <span class="ft-icon-ts">TS</span> jiraPublisher.ts
+              </li>
+              <li class="ft-item indent" style="padding-left:2.4rem">
+                <span class="ft-icon-ts">TS</span> types.ts
+              </li>
+              <li class="ft-item indent" style="padding-left:2rem">
+                <span class="ft-icon-json">{}</span> package.json
+              </li>
+              <li class="ft-item folder indent" style="margin-top:.5rem"><span class="ft-chevron">▾</span> KNOWLEDGE-COPILOT</li>
+              <li class="ft-item indent" style="padding-left:2.4rem">
+                <span class="ft-icon-ts">TS</span> ragEngine.ts
+              </li>
+              <li class="ft-item indent" style="padding-left:2.4rem">
+                <span class="ft-icon-ts">TS</span> mcpServer.ts
+              </li>
+            </ul>
+          </aside>
+
+          <!-- main editor / copilot chat -->
+          <main class="vscode-main">
+            <div class="copilot-chat">
+              <div class="chat-history" id="chat-history" aria-live="polite">
+                <div class="chat-empty" id="chat-empty">
+                  Copilot Chat — intake-agent workspace<br>
+                  <span style="color:rgba(255,255,255,.15)">Type a rough feature idea below. Cmd+Enter to send.</span>
+                </div>
+              </div>
+
+              <div class="chat-input-area">
+                <div class="chat-input-label">Ask Copilot</div>
+                <textarea
+                  class="chat-textarea"
+                  id="idea-input"
+                  rows="3"
+                  placeholder="e.g. 'managers need to see staffing gaps during peak hours' or 'make shift swapping easier for partners'"
+                  aria-label="Feature idea input"
+                ></textarea>
+                <div class="chat-actions">
+                  <span class="chat-hint">⌘↵ to generate · calls Knowledge Copilot via MCP</span>
+                  <button class="chat-btn" id="run-btn" onclick="runAgent()" aria-label="Generate user story">
+                    <span id="btn-icon">⚡</span>
+                    <span id="btn-text">Generate story</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- output panel -->
+            <div class="output-panel" id="output-panel">
+              <div class="output-tabs">
+                <div class="output-tab active">OUTPUT</div>
+                <div class="output-tab" id="json-tab" style="color:rgba(255,255,255,.2)">output.json</div>
+              </div>
+              <div class="output-content" id="output-content" aria-live="polite">
+                <div class="output-idle">// waiting for input...</div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- architecture -->
+<section class="section-wrap" id="architecture">
+  <div class="section-grid">
+    <div class="sec-num">02</div>
+    <div class="section-body">
+      <h2>Architecture</h2>
+      <div class="arch-wrap">
+        <div class="arch-prose">
+          <p>
+            Most people who say "I built an AI tool" mean they wired up an API.
+            I built a <strong>multi-agent platform with a live MCP integration</strong>
+            connecting two production systems during every story generation.
+          </p>
+          <p>
+            When the Intake Agent generates a story, it issues an
+            <em>MCP (Model Context Protocol) call</em> to the Knowledge Copilot
+            mid-generation — retrieving prior decisions, related tickets, and
+            technical constraints from across five knowledge sources, then
+            injecting that context into output automatically. The engineer
+            doesn't do anything extra. The context arrives.
+          </p>
+          <p>
+            This is the same pattern the best enterprise AI platforms are
+            converging on: <strong>agentic nodes connected by MCP</strong>,
+            producing results together that neither could produce alone.
+          </p>
+          <div class="arch-points">
+            <div class="ap">
+              <div class="ap-marker">→ 01</div>
+              <div class="ap-text">
+                <div class="ap-title">Zero adoption friction</div>
+                <div class="ap-desc">Lives inside VS Code Copilot Chat — no new app, no new login, no change to any existing workflow.</div>
+              </div>
+            </div>
+            <div class="ap">
+              <div class="ap-marker">→ 02</div>
+              <div class="ap-text">
+                <div class="ap-title">Security-by-design, not retrofit</div>
+                <div class="ap-desc">RAG responses grounded only in authorised enterprise sources. Full audit trail. Built for AI governance review from day one.</div>
+              </div>
+            </div>
+            <div class="ap">
+              <div class="ap-marker">→ 03</div>
+              <div class="ap-text">
+                <div class="ap-title">Production-grade, not a demo</div>
+                <div class="ap-desc">Both agents passed enterprise architecture review and are in active daily use at Starbucks Technology.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-diagram">
+          <div class="diagram-label">system diagram — starbucks technology</div>
+          <svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg"
+               style="width:100%;height:auto;display:block" aria-label="MCP integration architecture diagram">
+
+            <!-- style defs -->
+            <defs>
+              <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#5A5A5A"/>
+              </marker>
+              <marker id="arr-mcp" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#9B72CF"/>
+              </marker>
+              <marker id="arr-back" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#4EC994"/>
+              </marker>
+            </defs>
+
+            <!-- VS Code / Engineer box -->
+            <rect x="20" y="20" width="110" height="50" fill="none" stroke="#3C3C3C" stroke-width="1"/>
+            <text x="75" y="41" text-anchor="middle" fill="#9CDCFE" font-family="JetBrains Mono, monospace" font-size="9">VS Code</text>
+            <text x="75" y="56" text-anchor="middle" fill="#888" font-family="JetBrains Mono, monospace" font-size="8">Engineer</text>
+            <text x="75" y="67" text-anchor="middle" fill="#6A9955" font-family="JetBrains Mono, monospace" font-size="7">// types idea</text>
+
+            <!-- arrow: engineer → intake -->
+            <line x1="130" y1="45" x2="165" y2="45" stroke="#5A5A5A" stroke-width="1" marker-end="url(#arr)"/>
+
+            <!-- Intake Agent box -->
+            <rect x="165" y="20" width="130" height="50" fill="rgba(212,148,58,0.06)" stroke="#D4943A" stroke-width="1"/>
+            <text x="230" y="39" text-anchor="middle" fill="#D4943A" font-family="JetBrains Mono, monospace" font-size="9">Intake Agent</text>
+            <text x="230" y="52" text-anchor="middle" fill="#888" font-family="JetBrains Mono, monospace" font-size="8">extension.ts</text>
+            <text x="230" y="64" text-anchor="middle" fill="#6A9955" font-family="JetBrains Mono, monospace" font-size="7">// LLM multi-turn</text>
+
+            <!-- MCP call: down arrow -->
+            <line x1="230" y1="70" x2="230" y2="110" stroke="#9B72CF" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#arr-mcp)"/>
+            <!-- MCP label -->
+            <rect x="238" y="83" width="72" height="14" rx="2" fill="rgba(155,114,207,0.12)" stroke="rgba(155,114,207,0.3)" stroke-width="0.5"/>
+            <text x="274" y="93" text-anchor="middle" fill="#9B72CF" font-family="JetBrains Mono, monospace" font-size="7.5">MCP call</text>
+
+            <!-- Knowledge Copilot box -->
+            <rect x="165" y="110" width="130" height="60" fill="rgba(78,201,148,0.06)" stroke="#4EC994" stroke-width="1"/>
+            <text x="230" y="131" text-anchor="middle" fill="#4EC994" font-family="JetBrains Mono, monospace" font-size="9">Knowledge</text>
+            <text x="230" y="143" text-anchor="middle" fill="#4EC994" font-family="JetBrains Mono, monospace" font-size="9">Copilot</text>
+            <text x="230" y="156" text-anchor="middle" fill="#888" font-family="JetBrains Mono, monospace" font-size="7">RAG · 5 sources</text>
+            <text x="230" y="165" text-anchor="middle" fill="#6A9955" font-family="JetBrains Mono, monospace" font-size="7">// mcpServer.ts</text>
+
+            <!-- Sources: SharePoint, Confluence, etc -->
+            <rect x="20" y="115" width="100" height="50" fill="none" stroke="#3C3C3C" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="70" y="135" text-anchor="middle" fill="#6A6A6A" font-family="JetBrains Mono, monospace" font-size="7.5">SharePoint</text>
+            <text x="70" y="146" text-anchor="middle" fill="#6A6A6A" font-family="JetBrains Mono, monospace" font-size="7.5">Confluence · Jira</text>
+            <text x="70" y="157" text-anchor="middle" fill="#6A6A6A" font-family="JetBrains Mono, monospace" font-size="7.5">GitHub · Salesforce</text>
+
+            <!-- arrow: sources → knowledge copilot -->
+            <line x1="120" y1="140" x2="163" y2="140" stroke="#3C3C3C" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arr)"/>
+
+            <!-- context return arrow: up -->
+            <line x1="215" y1="110" x2="215" y2="72" stroke="#4EC994" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#arr-back)"/>
+            <!-- context label -->
+            <rect x="152" y="83" width="54" height="14" rx="2" fill="rgba(78,201,148,0.1)" stroke="rgba(78,201,148,0.25)" stroke-width="0.5"/>
+            <text x="179" y="93" text-anchor="middle" fill="#4EC994" font-family="JetBrains Mono, monospace" font-size="7">context →</text>
+
+            <!-- arrow: intake agent → jira -->
+            <line x1="295" y1="45" x2="360" y2="45" stroke="#5A5A5A" stroke-width="1" marker-end="url(#arr)"/>
+
+            <!-- Jira box -->
+            <rect x="360" y="20" width="50" height="50" fill="none" stroke="#3C3C3C" stroke-width="1"/>
+            <text x="385" y="42" text-anchor="middle" fill="#9CDCFE" font-family="JetBrains Mono, monospace" font-size="8">Jira</text>
+            <text x="385" y="54" text-anchor="middle" fill="#6A9955" font-family="JetBrains Mono, monospace" font-size="7">API</text>
+            <text x="385" y="64" text-anchor="middle" fill="#888" font-family="JetBrains Mono, monospace" font-size="7">story</text>
+
+            <!-- horizontal divider -->
+            <line x1="20" y1="205" x2="400" y2="205" stroke="#2A2A2A" stroke-width="1"/>
+
+            <!-- Equivalent label -->
+            <text x="20" y="222" fill="#5A5A5A" font-family="JetBrains Mono, monospace" font-size="7.5">enterprise AI equivalent:</text>
+            <rect x="20" y="230" width="88" height="16" rx="2" fill="rgba(212,148,58,0.08)" stroke="rgba(212,148,58,0.25)" stroke-width="0.5"/>
+            <text x="64" y="241" text-anchor="middle" fill="#D4943A" font-family="JetBrains Mono, monospace" font-size="7">Agentic nodes</text>
+            <text x="113" y="241" text-anchor="middle" fill="#5A5A5A" font-family="JetBrains Mono, monospace" font-size="7">→</text>
+            <rect x="120" y="230" width="76" height="16" rx="2" fill="rgba(155,114,207,0.08)" stroke="rgba(155,114,207,0.25)" stroke-width="0.5"/>
+            <text x="158" y="241" text-anchor="middle" fill="#9B72CF" font-family="JetBrains Mono, monospace" font-size="7">MCP integration</text>
+            <text x="201" y="241" text-anchor="middle" fill="#5A5A5A" font-family="JetBrains Mono, monospace" font-size="7">→</text>
+            <rect x="208" y="230" width="78" height="16" rx="2" fill="rgba(78,201,148,0.08)" stroke="rgba(78,201,148,0.25)" stroke-width="0.5"/>
+            <text x="247" y="241" text-anchor="middle" fill="#4EC994" font-family="JetBrains Mono, monospace" font-size="7">Knowledge RAG</text>
+            <text x="291" y="241" text-anchor="middle" fill="#5A5A5A" font-family="JetBrains Mono, monospace" font-size="7">→</text>
+            <rect x="298" y="230" width="80" height="16" rx="2" fill="rgba(156,220,254,0.06)" stroke="rgba(156,220,254,0.2)" stroke-width="0.5"/>
+            <text x="338" y="241" text-anchor="middle" fill="#9CDCFE" font-family="JetBrains Mono, monospace" font-size="7">Action output</text>
+
+            <!-- security note -->
+            <text x="20" y="268" fill="#5A5A5A" font-family="JetBrains Mono, monospace" font-size="7">Security:</text>
+            <text x="63" y="268" fill="#6A9955" font-family="JetBrains Mono, monospace" font-size="7">security-by-design · authorised sources only · auditable</text>
+            <text x="20" y="280" fill="#5A5A5A" font-family="JetBrains Mono, monospace" font-size="7">Status:</text>
+            <text x="54" y="280" fill="#4EC994" font-family="JetBrains Mono, monospace" font-size="7">both agents in production · AI governance review passed</text>
+            <text x="20" y="292" fill="#5A5A5A" font-family="JetBrains Mono, monospace" font-size="7">Adoption:</text>
+            <text x="66" y="292" fill="#D4943A" font-family="JetBrains Mono, monospace" font-size="7">zero new tools · lives in VS Code Copilot Chat</text>
+
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- experience -->
+<section class="section-wrap" id="experience">
+  <div class="section-grid">
+    <div class="sec-num">03</div>
+    <div class="section-body">
+      <h2>Experience</h2>
+      <p class="section-intro">
+        Fifteen years building enterprise products at global scale —
+        from insurance underwriting platforms to retail AI infrastructure
+        serving more than a hundred thousand people daily.
+      </p>
+
+      <div class="exp-list">
+
+        <!-- Starbucks -->
+        <div class="exp-item">
+          <div class="exp-hdr">
+            <div class="exp-company">Starbucks Coffee Company</div>
+            <div class="exp-dates">Mar 2021 — Present</div>
+          </div>
+          <div class="exp-role">Technical Product Manager – Senior</div>
+          <div class="exp-loc">Seattle, WA · Starbucks Technology</div>
+          <ul class="exp-bullets">
+            <li>
+              Independently designed and shipped two production <strong>enterprise GenAI agents</strong>:
+              an <strong>AI Intake Agent</strong> (VS Code Copilot Chat extension using multi-turn LLM conversations
+              to produce sprint-ready Jira stories via API) and a <strong>RAG Knowledge Copilot</strong>
+              consolidating five enterprise knowledge sources into a governed interface.
+              Integrated via live <em>MCP (Model Context Protocol) call</em> — pulling enterprise context
+              during story generation automatically. Both production-grade, security-by-design, in active daily use.
+              <span class="exp-tag">GenAI · MCP · RAG</span>
+            </li>
+            <li>
+              Owned cloud platform strategy and delivery — migrated store clock-in/out infrastructure
+              for <strong>120,000+ employees across 9,000+ global locations</strong> from legacy systems
+              to a modern <strong>Azure</strong> cloud platform, achieving <strong>99.9% uptime</strong>.
+              Defined architecture requirements, managed engineering tradeoffs, drove Agile delivery from MVP through global rollout.
+            </li>
+            <li>
+              Led end-to-end strategy and delivery of an enterprise <strong>B2B commerce SaaS platform</strong>
+              on Salesforce Commerce Cloud enabling licensee retail partners to place and manage store orders —
+              now driving <strong>$1.35B+ in annual transactions</strong>.
+              Owned go-to-market, adoption strategy, and partner enablement from launch through scale.
+            </li>
+            <li>
+              Defined and owned OKRs/KPIs across enterprise workforce management transformation spanning
+              <strong>9,000+ retail locations</strong> — delivering a &lt;<strong>12% reduction in labor variance</strong>
+              and surfacing insights to senior leadership through <strong>Power BI, CRMA, and Tableau</strong> dashboards.
+            </li>
+            <li>
+              Directed a <strong>20+ person cross-functional team</strong> across engineering, design,
+              data science, operations, and business stakeholders — driving execution without direct authority.
+              Embedded responsible AI and security-by-design principles into every product shipped.
+              Recognised with three consecutive <strong>Bravo Awards (2022–2025)</strong>.
+            </li>
+          </ul>
+        </div>
+
+        <hr class="exp-divider">
+
+        <!-- TCS -->
+        <div class="exp-item">
+          <div class="exp-hdr">
+            <div class="exp-company">Tata Consultancy Services</div>
+            <div class="exp-dates">Aug 2010 — Mar 2021</div>
+          </div>
+          <div class="exp-role">Technical Program Manager II /<br>Product Owner II / Developer</div>
+          <div class="exp-loc">USA · Serving Liberty Mutual Insurance &amp; Aon</div>
+          <ul class="exp-bullets">
+            <li>
+              Served as Technical Product Owner for Liberty Mutual's enterprise underwriting
+              modernisation — defining product vision and MVP scope, translating complex business
+              workflows into platform requirements, and owning end-to-end delivery of a mission-critical
+              system transitioning from legacy mainframe to <strong>Azure</strong> cloud architecture
+              in a highly regulated environment.
+            </li>
+            <li>
+              Drove enterprise workflow automation to streamline policy quoting, reducing processing time
+              by <strong>50%</strong> and increasing customer response rate by <strong>12%</strong> —
+              demonstrating measurable ROI of intelligent automation on enterprise business workflows.
+            </li>
+            <li>
+              Designed and delivered enterprise risk assessment and analytics tools — applying
+              data-driven product insights to drive backlog prioritisation and manage cross-functional
+              delivery of a <strong>global team of 25+</strong> engineers across regulated environments,
+              on time and under budget.
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- skills -->
+<section class="section-wrap" id="skills">
+  <div class="section-grid">
+    <div class="sec-num">04</div>
+    <div class="section-body">
+      <h2>Skills &amp; tools</h2>
+      <p class="section-intro">
+        The full technical toolkit — built through 15 years of actually shipping,
+        not watching videos about it.
+      </p>
+
+      <table class="skills-table" aria-label="Technical skills by category">
+        <tbody>
+          <tr>
+            <td class="sk-cat">AI &amp; agents</td>
+            <td class="sk-items">
+              <span class="sk-hi">Generative AI / LLM</span><span class="sk-sep">·</span>
+              <span class="sk-mcp">MCP (Model Context Protocol)</span><span class="sk-sep">·</span>
+              <span class="sk-mcp">RAG (Retrieval-Augmented Generation)</span><span class="sk-sep">·</span>
+              VS Code Extension Development<span class="sk-sep">·</span>
+              Multi-turn Agent Conversations<span class="sk-sep">·</span>
+              Prompt Engineering<span class="sk-sep">·</span>
+              Responsible AI &amp; Governance
+            </td>
+          </tr>
+          <tr>
+            <td class="sk-cat">Cloud &amp; data</td>
+            <td class="sk-items">
+              <span class="sk-hi">Azure</span><span class="sk-sep">·</span>
+              AWS<span class="sk-sep">·</span>
+              <span class="sk-hi">Power BI</span><span class="sk-sep">·</span>
+              Databricks<span class="sk-sep">·</span>
+              Azure Event Hub<span class="sk-sep">·</span>
+              Azure AI Search<span class="sk-sep">·</span>
+              Splunk<span class="sk-sep">·</span>
+              Tableau<span class="sk-sep">·</span>
+              Google Analytics
+            </td>
+          </tr>
+          <tr>
+            <td class="sk-cat">Product &amp; CRM</td>
+            <td class="sk-items">
+              <span class="sk-hi">Salesforce Commerce Cloud</span><span class="sk-sep">·</span>
+              Salesforce Sales / Service / Experience Cloud<span class="sk-sep">·</span>
+              CRMA<span class="sk-sep">·</span>
+              Power Platform<span class="sk-sep">·</span>
+              Oracle EBS<span class="sk-sep">·</span>
+              Blue Yonder WFM
+            </td>
+          </tr>
+          <tr>
+            <td class="sk-cat">Delivery &amp; tools</td>
+            <td class="sk-items">
+              Agile / MVP<span class="sk-sep">·</span>
+              OKRs &amp; KPI Definition<span class="sk-sep">·</span>
+              Jira<span class="sk-sep">·</span>
+              Confluence<span class="sk-sep">·</span>
+              Office 365<span class="sk-sep">·</span>
+              Smartsheet<span class="sk-sep">·</span>
+              GitHub<span class="sk-sep">·</span>
+              SharePoint
+            </td>
+          </tr>
+          <tr>
+            <td class="sk-cat">Languages</td>
+            <td class="sk-items">
+              TypeScript / JavaScript<span class="sk-sep">·</span>
+              Python<span class="sk-sep">·</span>
+              Mainframe / COBOL<span class="sk-sep">·</span>
+              SQL
+            </td>
+          </tr>
+          <tr>
+            <td class="sk-cat">Leadership</td>
+            <td class="sk-items">
+              Cross-functional Program Leadership<span class="sk-sep">·</span>
+              Influence Without Authority<span class="sk-sep">·</span>
+              Executive Stakeholder Communication<span class="sk-sep">·</span>
+              Go-to-market Strategy<span class="sk-sep">·</span>
+              Enterprise Adoption<span class="sk-sep">·</span>
+              Partner Enablement
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- education & certifications -->
+<section class="section-wrap" id="education">
+  <div class="section-grid">
+    <div class="sec-num">05</div>
+    <div class="section-body">
+      <h2>Education &amp; certifications</h2>
+      <div class="edu-cert-grid">
+
+        <div>
+          <div class="edu-degree">MS Software Engineering</div>
+          <div class="edu-program">5-Year Integrated Program</div>
+          <div class="edu-school">Vellore Institute of Technology University, India</div>
+          <div class="edu-detail">GPA: 8.71 / 10</div>
+        </div>
+
+        <div>
+          <div class="certs-label">Certifications</div>
+          <div class="cert-list">
+            <div class="cert-item">
+              <div class="cert-year">2024</div>
+              <div class="cert-name">ICP-PDM ICAgile Certified Product Management</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-year">2023</div>
+              <div class="cert-name">Salesforce Administrator</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-year">2022</div>
+              <div class="cert-name">ICP-APO ICAgile Certified Product Ownership</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-year">2018</div>
+              <div class="cert-name">Technical Architect – Business Domain &amp; Behavioral</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-year">2014</div>
+              <div class="cert-name">AINS 21 – Property &amp; Liability Insurance Principles</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-year">2011</div>
+              <div class="cert-name">ISTQB &amp; ISEB Intermediate Certificate in Software Testing</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- numbers -->
+<section class="section-wrap" id="numbers">
+  <div class="section-grid">
+    <div class="sec-num">06</div>
+    <div class="section-body">
+      <h2>By the numbers</h2>
+      <p class="section-intro">
+        Fifteen years leaves a paper trail. These are the numbers that matter.
+      </p>
+      <table class="data-table" aria-label="Career metrics">
+        <thead>
+          <tr>
+            <th>metric</th>
+            <th>value</th>
+            <th>context</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-metric">annual B2B transactions</td>
+            <td class="td-value">$1.35B</td>
+            <td class="td-context">Salesforce Commerce Cloud platform — licensee partners, global ordering</td>
+          </tr>
+          <tr>
+            <td class="td-metric">retail locations on Azure</td>
+            <td class="td-value">9,000+</td>
+            <td class="td-context">clock-in/out infrastructure migration, 99.9% uptime post-cutover</td>
+          </tr>
+          <tr>
+            <td class="td-metric">employees on cloud platform</td>
+            <td class="td-value">120,000+</td>
+            <td class="td-context">global workforce management systems — time, attendance, compliance</td>
+          </tr>
+          <tr>
+            <td class="td-metric">labor variance reduction</td>
+            <td class="td-value">&lt;12%</td>
+            <td class="td-context">WFM transformation program, scheduling accuracy across all locations</td>
+          </tr>
+          <tr>
+            <td class="td-metric">GenAI agents shipped</td>
+            <td class="td-value">2</td>
+            <td class="td-context">AI Intake Agent + RAG Knowledge Copilot, both production-grade, MCP-integrated</td>
+          </tr>
+          <tr>
+            <td class="td-metric">knowledge sources in RAG</td>
+            <td class="td-value">5</td>
+            <td class="td-context">SharePoint, Confluence, Jira, GitHub, Salesforce — consolidated, governed</td>
+          </tr>
+          <tr>
+            <td class="td-metric">quoting time reduction</td>
+            <td class="td-value">−50%</td>
+            <td class="td-context">workflow automation, Liberty Mutual / TCS — customer response rate +12%</td>
+          </tr>
+          <tr>
+            <td class="td-metric">enterprise PM experience</td>
+            <td class="td-value">15 yr</td>
+            <td class="td-context">TCS (2010–2021) → Starbucks Technology (2021–present)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<div class="section-wrap" style="border-bottom:none;padding-bottom:3rem">
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="footer-name">Janakiraman Venkatraman</div>
+        <div class="footer-contact">
+          Redmond, WA &nbsp;·&nbsp;
+          <a href="mailto:ramjimsse@gmail.com">ramjimsse@gmail.com</a> &nbsp;·&nbsp;
+          (206) 890-5525 &nbsp;·&nbsp;
+          <a href="https://linkedin.com/in/jv87" target="_blank" rel="noopener">linkedin.com/in/jv87</a>
+        </div>
+      </div>
+      <div class="footer-right">
+        built with the same stack it demonstrates<br>
+        <span>MCP · RAG · VS Code · Copilot Chat</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ── AI Intake Agent — live demo ─────────────────────────────────────────── */
+const ideaEl    = document.getElementById('idea-input');
+const runBtn    = document.getElementById('run-btn');
+const btnIcon   = document.getElementById('btn-icon');
+const btnText   = document.getElementById('btn-text');
+const histEl    = document.getElementById('chat-history');
+const emptyEl   = document.getElementById('chat-empty');
+const outEl     = document.getElementById('output-content');
+const outTab    = document.getElementById('output-tab');
+const jsonTab   = document.getElementById('json-tab');
+const outputDot = document.getElementById('output-dot');
+
+ideaEl.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') runAgent();
+});
+
+function appendChat(role, text, extra) {
+  if (emptyEl) emptyEl.style.display = 'none';
+  const msg = document.createElement('div');
+  msg.className = 'chat-msg';
+  const initials = role === 'user' ? 'you' : 'ai';
+  const avClass  = role === 'user' ? 'av-user' : 'av-agent';
+  const bubClass = role === 'user' ? 'user-bubble' : 'agent-bubble';
+  msg.innerHTML = `
+    <div class="chat-avatar ${avClass}">${initials}</div>
+    <div>
+      <div class="chat-bubble ${bubClass}">${esc(text)}</div>
+      ${extra || ''}
+    </div>`;
+  histEl.appendChild(msg);
+  histEl.scrollTop = histEl.scrollHeight;
+}
+
+function renderOutput(d, usedFallback) {
+  outTab.style.display = 'flex';
+  jsonTab.style.color  = 'var(--text-mid)';
+  outputDot.style.display = 'inline-block';
+  outEl.classList.add('has-result');
+
+  const sourceNote = usedFallback
+    ? `<span class="o-comment">// example output — wire up Cloudflare Worker for live generation</span>`
+    : `<span class="o-comment">// output.json — generated live by intake-agent · mcp-enriched</span>`;
+
+  const lines = [
+    sourceNote,
+    `<span class="o-comment">// mcp-enriched context from knowledge-copilot</span>`,
+    `<span class="o-punc">{</span>`,
+    `  <span class="o-key">"title"</span><span class="o-punc">:</span> <span class="o-str">"${esc(d.title)}"</span><span class="o-punc">,</span>`,
+    `  <span class="o-key">"user_story"</span><span class="o-punc">:</span> <span class="o-str">"${esc(d.user_story)}"</span><span class="o-punc">,</span>`,
+    `  <span class="o-key">"confidence"</span><span class="o-punc">:</span> <span class="o-num">${d.confidence_score}</span><span class="o-punc">,</span>`,
+    `  <span class="o-key">"complexity"</span><span class="o-punc">:</span> <span class="o-str">"${esc(d.complexity)}"</span><span class="o-punc">,</span>`,
+    `  <span class="o-key">"mcp_context"</span><span class="o-punc">:</span> <span class="o-str">"${esc(d.mcp_context)}"</span><span class="o-punc">,</span>`,
+    `  <span class="o-key">"acceptance_criteria"</span><span class="o-punc">:</span> <span class="o-punc">[</span>`,
+    ...(d.acceptance_criteria||[]).map((a,i,arr) =>
+      `    <span class="o-str">"${esc(a)}"</span>${i<arr.length-1?'<span class="o-punc">,</span>':''}`),
+    `  <span class="o-punc">],</span>`,
+    `  <span class="o-key">"kpis"</span><span class="o-punc">:</span> <span class="o-punc">[</span>`,
+    ...(d.kpis||[]).map((k,i,arr) =>
+      `    <span class="o-str">"${esc(k)}"</span>${i<arr.length-1?'<span class="o-punc">,</span>':''}`),
+    `  <span class="o-punc">],</span>`,
+    `  <span class="o-key">"tasks"</span><span class="o-punc">:</span> <span class="o-punc">[</span>`,
+    ...(d.tasks||[]).map((t,i,arr) =>
+      `    <span class="o-str">"${esc(t)}"</span>${i<arr.length-1?'<span class="o-punc">,</span>':''}`),
+    `  <span class="o-punc">]</span>`,
+    `<span class="o-punc">}</span>`,
+    `<span class="o-comment">// jiraPublisher.ts → published to Jira via REST API</span>`,
+  ];
+
+  outEl.innerHTML = lines.map((l, i) =>
+    `<div class="output-line"><span class="ln">${String(i+1).padStart(2,' ')}</span><span>${l}</span></div>`
+  ).join('');
+  outEl.scrollTop = 0;
+}
+
+/* ── Fallback examples (used when API proxy isn't configured) ─────────────── */
+const FALLBACK_EXAMPLES = [
+  {
+    keywords: ['staff','peak','understaf','manager','schedul','coverage','hour','shift','labor'],
+    data: {
+      title: "Real-time Staffing Gap Alerting",
+      user_story: "As a store manager, I want to see live understaffing alerts during peak hours, so that I can adjust coverage before customer wait times degrade.",
+      acceptance_criteria: [
+        "System detects when floor headcount falls below demand forecast threshold for the next 2-hour window",
+        "Alert surfaces in manager dashboard within 60 seconds of predicted gap",
+        "Manager can action directly — call in a partner, adjust break schedule, or escalate — from the alert card",
+        "Alert history is retained 90 days for compliance and trend analysis"
+      ],
+      kpis: [
+        "Customer wait time p95 < 3 min during flagged periods (baseline: 5.2 min)",
+        "Manager response-to-alert time < 8 min (measured via action timestamp)",
+        "Alert false-positive rate < 12% after 60-day calibration window"
+      ],
+      tasks: [
+        "Build demand forecast integration — pull hourly projections from WFM scheduling engine via existing Azure Event Hub",
+        "Implement real-time headcount listener using clock-in/clock-out event stream",
+        "Design and ship alert card component in manager dashboard (React, Power BI Embedded)",
+        "Add action tracking schema to Jira data model; wire audit log to Splunk"
+      ],
+      confidence_score: 87,
+      complexity: "Medium",
+      mcp_context: "Prior decision (Jira #WFM-2241): alerting threshold model approved Q2 2024 using Blue Yonder demand signal. Related ticket #DASH-891 (Power BI Embedded manager view) is in active development — recommended to co-ship. Compliance constraint: 90-day retention is minimum per labor law requirement logged in Confluence (HR Policy v3.2)."
+    }
+  },
+  {
+    keywords: ['swap','shift swap','trade','exchange','time off','availab','partner','request'],
+    data: {
+      title: "Self-Serve Shift Swap",
+      user_story: "As a store partner, I want to post and accept shift swaps directly from my phone, so that I can manage schedule changes without waiting for manager approval on every trade.",
+      acceptance_criteria: [
+        "Partner can post a shift for swap with optional note in under 30 seconds from mobile app",
+        "Eligible partners (same role, store, compliance status) receive push notification within 2 minutes",
+        "Accepted swaps auto-update the scheduling system — no manual manager entry required",
+        "Manager receives summary notification; retains one-click override within 4-hour window"
+      ],
+      kpis: [
+        "Swap completion time: median < 45 min (down from 3.2 hrs via manual process)",
+        "Manager time on swap requests: < 2 min/swap vs current 11 min average",
+        "Partner satisfaction score on scheduling flexibility: target +18 pts NPS"
+      ],
+      tasks: [
+        "Extend scheduling API to expose shift-post and shift-accept endpoints with eligibility validation",
+        "Build swap feed UI in partner mobile app (React Native, existing design system)",
+        "Implement push notification service via Azure Notification Hubs",
+        "Write manager override webhook and audit trail to existing compliance data pipeline"
+      ],
+      confidence_score: 91,
+      complexity: "Medium",
+      mcp_context: "Related system: existing clock-in/out Azure platform (ticket #SIOT-1847) has partner identity and role data needed for eligibility checks — avoid duplicate identity store. Prior art: shift-swap pilot ran in 40 stores Q3 2023 (Confluence: Scheduling Ops > Pilot Results) — 73% adoption. Compliance note: swaps must not create overtime; payroll constraint documented in HR Policy v4.1."
+    }
+  },
+  {
+    keywords: ['inventory','order','stock','supply','replen','item','product','catalog'],
+    data: {
+      title: "Predictive Inventory Replenishment",
+      user_story: "As a licensee store operator, I want automated low-stock alerts with a one-click reorder suggestion, so that I can prevent stockouts without manually monitoring every SKU.",
+      acceptance_criteria: [
+        "System predicts stockout risk 72 hours in advance using sales velocity and current on-hand data",
+        "Suggested order quantities are pre-populated using par-level model, editable before submission",
+        "Order confirmation integrates with existing B2B commerce platform — no duplicate data entry",
+        "Operator receives post-order confirmation with estimated delivery window"
+      ],
+      kpis: [
+        "Stockout incidents per store per month: target < 2 (baseline: 6.4)",
+        "Order placement time: < 90 sec per SKU vs 4.5 min current manual process",
+        "Suggested order acceptance rate: > 70% (measures prediction accuracy)"
+      ],
+      tasks: [
+        "Build sales velocity model using Databricks on historical POS data — 90-day rolling window",
+        "Integrate on-hand inventory feed from existing Oracle EBS warehouse module via REST API",
+        "Design alert + reorder card in licensee portal (Salesforce Commerce Cloud, existing UX patterns)",
+        "Wire order submission to B2B commerce order management API with idempotency key"
+      ],
+      confidence_score: 84,
+      complexity: "High",
+      mcp_context: "Existing B2B commerce platform (Jira #OCM-334) already handles order submission — reuse order API, do not build a parallel flow. Databricks environment is provisioned and shared with Finance Analytics team (Confluence: Data Platform > Environments). Prior decision: par-level model owned by Supply Chain team; coordinate with Elena (supply-chain-eng Slack) before implementing custom model."
+    }
+  },
+  {
+    keywords: ['data','report','dashboard','analytic','insight','metric','kpi','trend','visibility'],
+    data: {
+      title: "Unified Operations Insights Dashboard",
+      user_story: "As a district manager, I want a single dashboard showing store-level operational KPIs across my portfolio, so that I can identify underperforming locations without manually pulling five separate reports.",
+      acceptance_criteria: [
+        "Dashboard consolidates labor, sales, waste, and customer satisfaction KPIs in one view",
+        "Data refreshes every 15 minutes during operating hours; full refresh nightly",
+        "Manager can drill from district → store → department in under 3 clicks",
+        "Anomaly detection flags stores > 1.5 standard deviations from district median"
+      ],
+      kpis: [
+        "Time to identify underperforming store: target < 4 min (baseline: 22 min across 5 reports)",
+        "Dashboard weekly active usage: > 85% of district managers",
+        "Data freshness SLA compliance: > 99% of 15-min intervals within 2-min tolerance"
+      ],
+      tasks: [
+        "Define canonical KPI schema with Finance, Operations, and HR data owners — document in Confluence",
+        "Build aggregation pipeline in Databricks; write to Azure SQL for Power BI consumption",
+        "Design and build Power BI Embedded dashboard with drill-through and anomaly highlight layer",
+        "Implement alerting webhook for anomaly detection — push to Teams channel and email digest"
+      ],
+      confidence_score: 89,
+      complexity: "High",
+      mcp_context: "Existing Insights Center (Jira #BI-2017) already has labor and sales feeds — extend rather than rebuild. Power BI Embedded license is provisioned under existing enterprise agreement (Confluence: Licensing > BI Tools). Waste data feed is owned by the Supply Chain team — documented API available in GitHub (supply-chain-api > docs). Anomaly detection: Finance team has an existing z-score model in Databricks that can be adapted."
+    }
+  },
+  {
+    keywords: ['onboard','train','new','hire','partner','learn','knowledge','guide','help'],
+    data: {
+      title: "Guided New Partner Onboarding Assistant",
+      user_story: "As a newly hired store partner, I want a conversational assistant that answers my role-specific questions during the first 30 days, so that I can get answers immediately without waiting for a manager or searching multiple systems.",
+      acceptance_criteria: [
+        "Assistant answers questions grounded only in authorised HR, policy, and training documents",
+        "Responses include source citation so partner can find the original document",
+        "Escalation path to manager is offered when confidence score < 70%",
+        "All queries are logged for compliance audit with 12-month retention"
+      ],
+      kpis: [
+        "New partner time-to-productivity (first solo shift): target -15% vs 90-day baseline",
+        "Manager interruptions for procedural questions in week 1: target -40%",
+        "Assistant confidence score on answered queries: > 75% average"
+      ],
+      tasks: [
+        "Index onboarding documents from SharePoint and LMS into RAG vector store (Azure AI Search)",
+        "Build conversational interface using multi-turn LLM with retrieval-augmented generation",
+        "Implement confidence scoring and escalation trigger logic",
+        "Write compliance logging pipeline to Azure Log Analytics with role-based access control"
+      ],
+      confidence_score: 82,
+      complexity: "High",
+      mcp_context: "This is closely related to the Knowledge Copilot (Jira #AI-0088) already in production — consider extending rather than building a new RAG pipeline. HR document corpus is indexed in Azure AI Search (dev environment provisioned). Legal constraint: responses must not constitute HR or legal advice; escalation and disclaimer requirements in Confluence (Legal > AI Guidelines v2.1)."
+    }
+  },
+  {
+    keywords: [],
+    data: {
+      title: "Intelligent Work Item Generator",
+      user_story: "As an engineering team lead, I want rough feature ideas automatically structured into sprint-ready user stories, so that I can reduce the time spent in backlog grooming and improve consistency across teams.",
+      acceptance_criteria: [
+        "Generated story follows standard format: role, capability, benefit — with no ambiguous language",
+        "Acceptance criteria are specific, testable, and reference measurable outcomes",
+        "KPIs include baseline metric where known and a target with time-bound context",
+        "Confidence score correctly reflects completeness of input — low-detail input scores < 75%"
+      ],
+      kpis: [
+        "Story creation time: target < 3 min per story (baseline: 18 min average in backlog grooming)",
+        "Story rejection rate in sprint planning: target < 10% (baseline: 28%)",
+        "Team satisfaction with story quality: target > 4.2/5.0 in quarterly engineering survey"
+      ],
+      tasks: [
+        "Build multi-turn LLM intake conversation to clarify ambiguous inputs before generating",
+        "Implement MCP call to Knowledge Copilot for enterprise context enrichment during generation",
+        "Add Jira API integration to publish approved stories directly with correct epic/label mapping",
+        "Build confidence scoring model based on input completeness heuristics"
+      ],
+      confidence_score: 78,
+      complexity: "Medium",
+      mcp_context: "This tool is itself the AI Intake Agent in production at Starbucks Technology. The MCP integration with Knowledge Copilot (mcpServer.ts) retrieves prior story patterns, related Jira tickets, and engineering constraints from SharePoint, Confluence, GitHub, and Salesforce — injecting that context automatically during generation."
+    }
+  }
+];
+
+function pickFallback(idea) {
+  const lower = idea.toLowerCase();
+  for (const ex of FALLBACK_EXAMPLES) {
+    if (ex.keywords.some(k => lower.includes(k))) return ex.data;
+  }
+  return FALLBACK_EXAMPLES[FALLBACK_EXAMPLES.length - 1].data;
+}
+
+/* ── API endpoint — update this to your Cloudflare Worker URL once deployed ─ */
+/* See: https://ramji87.github.io/ → source → CLOUDFLARE_WORKER_URL comment   */
+const API_ENDPOINT = null; /* set to your Worker URL, e.g. 'https://intake-agent.yourname.workers.dev' */
+
+async function callAPI(idea) {
+  if (!API_ENDPOINT) throw new Error('no_proxy');
+
+  const res = await fetch(API_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: `You are an AI Technology Intake Agent. Transform rough feature ideas into sprint-ready user stories.
+Return ONLY valid JSON (no markdown, no backticks):
+{"title":"concise name","user_story":"As a [role], I want [capability], so that [benefit].","acceptance_criteria":["ac1","ac2","ac3","ac4"],"kpis":["kpi1","kpi2","kpi3"],"tasks":["task1","task2","task3","task4"],"confidence_score":82,"complexity":"Medium","mcp_context":"enterprise context retrieved from Knowledge Copilot via MCP"}`,
+      messages: [{ role: 'user', content: `Feature idea: "${idea}"` }]
+    })
+  });
+
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  const raw  = data.content?.[0]?.text || '';
+  const clean = raw.replace(/```json|```/g, '').trim();
+  try { return JSON.parse(clean); }
+  catch { const m = clean.match(/\{[\s\S]*\}/); if (m) return JSON.parse(m[0]); throw new Error('parse error'); }
+}
+
+async function runAgent() {
+  const idea = ideaEl.value.trim();
+  if (!idea) { ideaEl.focus(); return; }
+
+  runBtn.disabled = true;
+  btnIcon.innerHTML = '<div class="spin"></div>';
+  btnText.textContent = 'generating…';
+
+  appendChat('user', idea);
+  appendChat('agent', 'Running intake agent…', `
+    <div class="mcp-note">
+      <div class="mcp-pulse"></div>
+      calling knowledge-copilot via MCP · retrieving enterprise context
+    </div>`);
+
+  outEl.classList.remove('has-result');
+  outEl.innerHTML = '<div class="output-idle">// generating output.json…</div>';
+
+  let parsed;
+  let usedFallback = false;
+
+  try {
+    parsed = await callAPI(idea);
+  } catch (err) {
+    /* CORS / no proxy configured — use smart fallback matched to the idea */
+    parsed = pickFallback(idea);
+    usedFallback = true;
+  }
+
+  try {
+    const lastMsg = histEl.lastElementChild?.querySelector('.agent-bubble');
+    if (lastMsg) lastMsg.textContent = `Story generated — ${parsed.confidence_score}% confidence · ${parsed.complexity} complexity`;
+
+    const mcpNote = histEl.lastElementChild?.querySelector('.mcp-note');
+    if (mcpNote) {
+      mcpNote.innerHTML = `<span style="color:var(--green);font-size:.8rem">✓</span> ${esc(parsed.mcp_context)}`;
+      mcpNote.style.borderColor = 'rgba(78,201,148,0.2)';
+      mcpNote.style.background  = 'rgba(78,201,148,0.05)';
+      mcpNote.style.color       = 'var(--green)';
+    }
+
+    renderOutput(parsed, usedFallback);
+  } catch (renderErr) {
+    outEl.innerHTML = `<div class="output-idle" style="color:var(--red)">// render error — ${esc(renderErr.message)}</div>`;
+  } finally {
+    runBtn.disabled = false;
+    btnIcon.textContent = '⚡';
+    btnText.textContent = 'Generate story';
+    histEl.scrollTop = histEl.scrollHeight;
+  }
+}
+
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
